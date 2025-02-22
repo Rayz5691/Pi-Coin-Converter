@@ -1,0 +1,53 @@
+const { Pi } = window;
+const appId = "your-pi-app-id"; // Replace with your Pi App ID
+const piWalletAddress = "your-pi-wallet-address"; // Replace with your Pi Wallet address
+
+// Function to request Pi payment
+async function requestPiPayment() {
+    try {
+        const payment = await Pi.createPayment({
+            amount: 0.1,
+            memo: "Pi Coin Conversion Fee",
+            metadata: { service: "Pi Converter" },
+            appId: appId
+        });
+        alert("Payment successful! You can now use the converter.");
+    } catch (error) {
+        alert("Payment failed. Please try again.");
+    }
+}
+
+// Function to verify manual payment from exchange wallets
+async function verifyManualPayment() {
+    let txHash = document.getElementById("txHash").value;
+    if (txHash.length > 10) {
+        alert("Transaction verified! You can now use the converter.");
+    } else {
+        alert("Invalid transaction ID. Please try again.");
+    }
+}
+
+// Function to convert Pi to fiat currency using CoinGecko API
+async function convertPiToFiat() {
+    const amount = document.getElementById("piAmount").value;
+    const currency = document.getElementById("currency").value;
+    
+    if (!amount || isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid Pi amount.");
+        return;
+    }
+    
+    try {
+        const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=pi-network&vs_currencies=${currency}`);
+        const data = await response.json();
+        const piPrice = data["pi-network"][currency];
+        
+        if (piPrice) {
+            document.getElementById("result").innerText = `Converted Amount: ${amount * piPrice} ${currency.toUpperCase()}`;
+        } else {
+            alert("Conversion rate not available for selected currency.");
+        }
+    } catch (error) {
+        alert("Error fetching conversion rate. Please try again later.");
+    }
+}
