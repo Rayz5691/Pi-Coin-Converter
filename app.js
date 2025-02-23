@@ -26,3 +26,15 @@ async function convertPi() {
 function payWithPi() {
     alert("Pi Wallet Payment feature coming soon!");
 }
+function convertFiatToPi() {
+    let fiatAmount = parseFloat(document.getElementById("fiatAmount").value);
+    let currency = document.getElementById("fiatCurrency").value;
+    let piToFiatRate = 6.62; // Assuming 1 Pi ≈ 6.62 MYR
+
+    if (!isNaN(fiatAmount) && fiatAmount > 0) {
+        let piValue = fiatAmount / piToFiatRate;
+        document.getElementById("fiatToPiResult").innerText = fiatAmount + " " + currency + " ≈ " + piValue.toFixed(6) + " Pi";
+    } else {
+        document.getElementById("fiatToPiResult").innerText = "Please enter a valid amount.";
+    }
+}
