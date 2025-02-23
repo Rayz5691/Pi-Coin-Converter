@@ -132,3 +132,70 @@
 
 </body>
 </html>
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Coin Converter</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        select, input, button { margin: 10px; padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h2>Pi Coin Converter</h2>
+    <label>Convert:</label>
+    <select id="conversionType">
+        <option value="piToFiat">Pi to Fiat</option>
+        <option value="fiatToPi">Fiat to Pi</option>
+    </select>
+    <br>
+    <input type="number" id="amount" placeholder="Enter amount">
+    <br>
+    <select id="currency"></select>
+    <br>
+    <button onclick="convertPi()">Convert</button>
+    <h3 id="result"></h3><script>
+    const currencies = ["USD", "EUR", "GBP", "JPY", "AUD", "SGD", "MYR", "INR", "CAD", "CNY"];
+    const selectCurrency = document.getElementById("currency");
+    currencies.forEach(currency => {
+        let option = document.createElement("option");
+        option.value = currency;
+        option.textContent = currency;
+        selectCurrency.appendChild(option);
+    });
+
+    async function convertPi() {
+        let amount = parseFloat(document.getElementById("amount").value);
+        let currency = document.getElementById("currency").value;
+        let conversionType = document.getElementById("conversionType").value;
+        
+        if (isNaN(amount) || amount <= 0) {
+            document.getElementById("result").textContent = "Please enter a valid amount.";
+            return;
+        }
+        
+        let piPrice = await getPiPrice(currency);
+        let result;
+        
+        if (conversionType === "piToFiat") {
+            result = (amount * piPrice).toFixed(2) + " " + currency;
+        } else {
+            result = (amount / piPrice).toFixed(6) + " Pi";
+        }
+        
+        document.getElementById("result").textContent = "Converted Value: " + result;
+    }
+
+    async function getPiPrice(currency) {
+        // Placeholder: Replace with real API call for live prices
+        const mockPrices = {
+            "USD": 50, "EUR": 45, "GBP": 40, "JPY": 5500, "AUD": 70, "SGD": 68,
+            "MYR": 230, "INR": 4200, "CAD": 65, "CNY": 320
+        };
+        return mockPrices[currency] || 50; // Default to 50 USD if currency not found
+    }
+</script>
+
+</body>
+</html>
