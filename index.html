@@ -1,53 +1,33 @@
-const { Pi } = window;
-const appId = "your-pi-app-id"; // Replace with your Pi App ID
-const piWalletAddress = "your-pi-wallet-address"; // Replace with your Pi Wallet address
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Coin Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Pi Coin Converter</h1>
 
-// Function to request Pi payment
-async function requestPiPayment() {
-    try {
-        const payment = await Pi.createPayment({
-            amount: 0.1,
-            memo: "Pi Coin Conversion Fee",
-            metadata: { service: "Pi Converter" },
-            appId: appId
-        });
-        alert("Payment successful! You can now use the converter.");
-    } catch (error) {
-        alert("Payment failed. Please try again.");
-    }
-}
+    <label for="piAmount">Enter Pi Amount:</label>
+    <input type="number" id="piAmount" placeholder="Enter Pi amount" />
 
-// Function to verify manual payment from exchange wallets
-async function verifyManualPayment() {
-    let txHash = document.getElementById("txHash").value;
-    if (txHash.length > 10) {
-        alert("Transaction verified! You can now use the converter.");
-    } else {
-        alert("Invalid transaction ID. Please try again.");
-    }
-}
+    <label for="currency">Select Currency:</label>
+    <select id="currency">
+        <option value="USD">USD - US Dollar</option>
+        <option value="EUR">EUR - Euro</option>
+        <option value="MYR">MYR - Malaysian Ringgit</option>
+        <option value="GBP">GBP - British Pound</option>
+        <option value="JPY">JPY - Japanese Yen</option>
+        <!-- Add more currencies here -->
+    </select>
 
-// Function to convert Pi to fiat currency using CoinGecko API
-async function convertPiToFiat() {
-    const amount = document.getElementById("piAmount").value;
-    const currency = document.getElementById("currency").value;
-    
-    if (!amount || isNaN(amount) || amount <= 0) {
-        alert("Please enter a valid Pi amount.");
-        return;
-    }
-    
-    try {
-        const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=pi-network&vs_currencies=${currency}`);
-        const data = await response.json();
-        const piPrice = data["pi-network"][currency];
-        
-        if (piPrice) {
-            document.getElementById("result").innerText = `Converted Amount: ${amount * piPrice} ${currency.toUpperCase()}`;
-        } else {
-            alert("Conversion rate not available for selected currency.");
-        }
-    } catch (error) {
-        alert("Error fetching conversion rate. Please try again later.");
-    }
-}
+    <button onclick="convertPi()">Convert</button>
+    <p id="result"></p>
+
+    <h2>Pay with Pi Wallet</h2>
+    <button onclick="payWithPi()">Pay 0.1 Pi</button>
+
+    <script src="app.js"></script>
+</body>
+</html>
