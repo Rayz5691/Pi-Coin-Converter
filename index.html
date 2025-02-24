@@ -1,161 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pi Coin Converter</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #333;
-            --container-bg: #f4f4f4;
-            --btn-bg: #007bff;
-            --btn-text: #fff;
-            --input-bg: #fff;
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #1e1e1e;
-            --text-color: #ffffff;
-            --container-bg: #2b2b2b;
-            --btn-bg: #ff9800;
-            --btn-text: #000;
-            --input-bg: #333;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .container {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: var(--container-bg);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        input, select, button {
-            margin: 10px 0;
-            padding: 10px;
-            width: 100%;
-            border: none;
-            border-radius: 5px;
-        }
-
-        input, select {
-            background-color: var(--input-bg);
-            color: var(--text-color);
-        }
-
-        button {
-            background-color: var(--btn-bg);
-            color: var(--btn-text);
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        .theme-toggle {
-            margin-top: 10px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-size: 18px;
-            color: var(--text-color);
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="container">
+        <h1>Pi Coin Converter</h1>
+        <button id="theme-toggle">🌞 Light Mode</button><label for="currency">Choose Fiat Currency:</label>
+    <select id="currency">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="MYR">MYR</option>
+    </select>
+    
+    <label for="piAmount">Enter Pi Amount:</label>
+    <input type="number" id="piAmount" placeholder="Enter Pi">
+    <button id="convertToFiat">Convert to Fiat</button>
+    
+    <label for="fiatAmount">Enter Fiat Amount:</label>
+    <input type="number" id="fiatAmount" placeholder="Enter Fiat">
+    <button id="convertToPi">Convert to Pi</button>
+    
+    <div class="donation-section">
+        <h2>Support Us</h2>
+        <p>If you like this tool, consider donating Pi:</p>
+        <button id="donate">Donate Pi</button>
+    </div>
+</div>
 
-    <div id="root"></div>
-
-    <script type="text/babel">
-        function PiCoinConverter() {
-            const [piPrice, setPiPrice] = React.useState(null);
-            const [fiatRates, setFiatRates] = React.useState({});
-            const [piAmount, setPiAmount] = React.useState("");
-            const [fiatAmount, setFiatAmount] = React.useState("");
-            const [selectedFiat, setSelectedFiat] = React.useState("USD");
-            const [result, setResult] = React.useState(null);
-            const [theme, setTheme] = React.useState(localStorage.getItem("theme") || "light");
-
-            React.useEffect(() => {
-                async function fetchPrices() {
-                    try {
-                        const piResponse = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=pi-network&vs_currencies=usd");
-                        const piData = await piResponse.json();
-                        setPiPrice(piData["pi-network"].usd);
-
-                        const fiatResponse = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
-                        const fiatData = await fiatResponse.json();
-                        setFiatRates(fiatData.rates);
-                    } catch (error) {
-                        console.error("Error fetching prices:", error);
-                    }
-                }
-                fetchPrices();
-            }, []);
-
-            React.useEffect(() => {
-                document.documentElement.setAttribute("data-theme", theme);
-                localStorage.setItem("theme", theme);
-            }, [theme]);
-
-            const convertPiToFiat = () => {
-                if (!piPrice || !fiatRates[selectedFiat]) return;
-                const fiatValue = piAmount * piPrice * fiatRates[selectedFiat];
-                setResult(`${fiatValue.toFixed(2)} ${selectedFiat}`);
-            };
-
-            const convertFiatToPi = () => {
-                if (!piPrice || !fiatRates[selectedFiat]) return;
-                const piValue = fiatAmount / (piPrice * fiatRates[selectedFiat]);
-                setResult(`${piValue.toFixed(4)} Pi`);
-            };
-
-            return (
-                <div className="container">
-                    <h2>Pi Coin Converter</h2>
-                    <button className="theme-toggle" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-                        {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-                    </button>
-
-                    <label>Choose Fiat Currency:</label>
-                    <select value={selectedFiat} onChange={(e) => setSelectedFiat(e.target.value)}>
-                        {Object.keys(fiatRates).map(currency => (
-                            <option key={currency} value={currency}>{currency}</option>
-                        ))}
-                    </select>
-
-                    <label>Enter Pi Amount:</label>
-                    <input type="number" value={piAmount} onChange={(e) => setPiAmount(e.target.value)} />
-                    <button onClick={convertPiToFiat}>Convert to Fiat</button>
-
-                    <label>Enter Fiat Amount:</label>
-                    <input type="number" value={fiatAmount} onChange={(e) => setFiatAmount(e.target.value)} />
-                    <button onClick={convertFiatToPi}>Convert to Pi</button>
-
-                    {result && <h3>Result: {result}</h3>}
-                </div>
-            );
-        }
-
-        const root = ReactDOM.createRoot(document.getElementById("root"));
-        root.render(<PiCoinConverter />);
-    </script>
+<script src="script.js"></script>
 
 </body>
 </html>
