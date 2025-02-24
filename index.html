@@ -112,5 +112,25 @@ p><div class="converter">
   window.onload = fetchPiPrice;
 </script>
 
+<script>
+    async function fetchPiPrice() {
+        try {
+            const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=pi-network&vs_currencies=usdt");
+            const data = await response.json();
+            if (data["pi-network"]) {
+                document.getElementById("pi-price").textContent = data["pi-network"].usdt + " USDT";
+            } else {
+                document.getElementById("pi-price").textContent = "Unavailable";
+            }
+        } catch (error) {
+            console.error("Error fetching Pi price:", error);
+            document.getElementById("pi-price").textContent = "Error";
+        }
+    }
+
+    fetchPiPrice(); // Call the function when the page loads
+    setInterval(fetchPiPrice, 60000); // Update price every 60 seconds
+</script>
+
 </body>
 </html>
