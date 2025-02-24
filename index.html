@@ -4,33 +4,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pi Coin Converter</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="app-container">
         <h1>Pi Coin Converter</h1>
-        <p id="pi-price">Loading Pi Price...</p><div class="converter">
-        <h2>Convert Pi to Fiat</h2>
-        <input type="number" id="pi-input" placeholder="Enter Pi amount">
+        <p>Current Pi Price: <span id="pi-price">Loading...</span> USDT</p><div class="converter">
+        <h2>Pi to Fiat</h2>
+        <input type="number" id="pi-amount" placeholder="Enter Pi amount">
         <select id="fiat-currency"></select>
         <button onclick="convertPiToFiat()">Convert</button>
-        <p id="pi-to-fiat-result"></p>
+        <p>Result: <span id="fiat-result">-</span></p>
     </div>
 
     <div class="converter">
-        <h2>Convert Fiat to Pi</h2>
-        <input type="number" id="fiat-input" placeholder="Enter Fiat amount">
+        <h2>Fiat to Pi</h2>
+        <input type="number" id="fiat-amount" placeholder="Enter Fiat amount">
         <select id="fiat-currency-2"></select>
         <button onclick="convertFiatToPi()">Convert</button>
-        <p id="fiat-to-pi-result"></p>
+        <p>Result: <span id="pi-result">-</span></p>
     </div>
 
     <div class="donation">
         <h2>Support Development</h2>
-        <p>Donate using crypto wallet:</p>
-        <button onclick="donateCrypto()">Donate</button>
+        <p>Donate using TON</p>
+        <p>Wallet Address: <span id="ton-wallet">TON_WALLET_ADDRESS</span></p>
+        <img src="ton_qr.png" alt="TON Wallet QR" width="150">
     </div>
 </div>
+
+<script>
+    const coingeckoAPI = "https://api.coingecko.com/api/v3/simple/price?ids=pi-network&vs_currencies=usdt";
+    
+    async function getPiPrice() {
+        try {
+            const response = await axios.get(coingeckoAPI);
+            const piPrice = response.data["pi-network"].usdt;
+            document.getElementById("pi-price").innerText = piPrice;
+            return piPrice;
+        } catch (error) {
+            console.error("Error fetching price", error);
+        }
+    }
+
+    async function convertPiToFiat() {
+        const piAmount = document.getElementById("pi-amount").value;
+        const currency = document.getElementById("fiat-currency").value;
+        const piPrice = await getPiPrice();
+        
+        if (piAmount && piPrice) {
+            const conversionRate = await getFiatExchangeRate(currency);
+            const result = (piAmount * piPrice * conversionRate).toFixed(2);
+            document.getElementById("fiat-result").innerText = result + " " + currency;
+        }
+    }
+
+    async function convertFiatToPi() {
+        const fiatAmount = document.getElementById("fiat-amount").value;
+        const currency = document.getElementById("fiat-currency-2").value;
+        const piPrice = await getPiPrice();
+        
+        if (fiatAmount && piPrice) {
+            const conversionRate = await getFiatExchangeRate(currency);
+            const result = (fiatAmount / (piPrice * conversionRate)).toFixed(4);
+            document.getElementById("pi-result").innerText = result + " Pi";
+        }
+    }
+
+    async function getFiatExchangeRate(currency) {
+        const exchangeAPI = `https://api.exchangerate-api.com/v4/latest/USD`;
+        try {
+            const response = await axios.get(exchangeAPI);
+            return response.data.rates[currency] || 1;
+        } catch (error) {
+            console.error("Error fetching exchange rate", error);
+            return 1;
+        }
+    }
+
+    async function loadCurrencies() {
+        const response = await axios.get("https://api.exchangerate-api.com/v4/latest/USD");
+        const currencies = Object.keys(response.data.rates);
+        let options = "";
+        currencies.forEach(curr => {
+            options += `<option value="${curr}">${curr}</option>`;
+        });
+        document.getElementById("fiat-currency").innerHTML = options;
+        document.getElementById("fiat-currency-2").innerHTML = options;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        getPiPrice();
+        loadCurrencies();
+    });
+</script>
 
 </body>
 </html>
