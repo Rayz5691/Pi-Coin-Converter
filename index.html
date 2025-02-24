@@ -93,3 +93,23 @@
 
 </body>
 </html>
+<script>
+  async function fetchPiPrice() {
+    try {
+      const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=pi-network-defi&vs_currencies=usdt");
+      const data = await response.json();
+      const piPrice = data["pi-network-defi"].usdt;
+
+      // Update the price display
+      document.getElementById("pi-price").textContent = `${piPrice} USDT`;
+
+      return piPrice; 
+    } catch (error) {
+      console.error("Error fetching Pi price:", error);
+      document.getElementById("pi-price").textContent = "Error fetching price";
+    }
+  }
+
+  // Call the function when the page loads
+  window.onload = fetchPiPrice;
+</script>
