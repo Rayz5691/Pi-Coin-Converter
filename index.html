@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,131 +7,142 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #1c1c3c;
-            color: #ffffff;
             text-align: center;
             padding: 20px;
+            background-color: #f8f9fa;
         }
         h1 {
-            color: #ffcc00;
+            color: #343a40;
         }
-        .converter {
-            background: #29294d;
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            background: white;
             padding: 20px;
-            border-radius: 10px;
-            display: inline-block;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         input, select, button {
+            width: 100%;
             padding: 10px;
-            margin: 10px;
+            margin: 5px 0;
             border-radius: 5px;
-            border: none;
+            border: 1px solid #ccc;
         }
         button {
-            background-color: #ffcc00;
+            background-color: #007bff;
+            color: white;
             cursor: pointer;
-            font-weight: bold;
         }
         button:hover {
-            background-color: #e6b800;
+            background-color: #0056b3;
         }
-        .donation {
-            margin-top: 20px;
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
+
     <h1>Pi Coin Converter</h1>
-    <p>Current Pi Price: <span id="pi-price">Loading...</span></p>
-p><div class="converter">
-    <h2>Pi to Fiat</h2>
-    <input type="number" id="piAmount" placeholder="Enter Pi amount">
-    <select id="fiatCurrency">
-        <option value="USD">USD</option>
-        <option value="MYR">MYR</option>
-        <option value="EUR">EUR</option>
-    </select>
-    <button onclick="convertPiToFiat()">Convert</button>
-    <p>Result: <span id="piToFiatResult">-</span></p>
-</div>
+    <p>Current Pi Price: <span id="pi-price">Loading...</span> USDT</p>
 
-<div class="converter">
-    <h2>Fiat to Pi</h2>
-    <input type="number" id="fiatAmount" placeholder="Enter Fiat amount">
-    <select id="fiatToPiCurrency">
-        <option value="USD">USD</option>
-        <option value="MYR">MYR</option>
-        <option value="EUR">EUR</option>
-    </select>
-    <button onclick="convertFiatToPi()">Convert</button>
-    <p>Result: <span id="fiatToPiResult">-</span></p>
-</div>
+    <div class="container">
+        <h2>Pi to Fiat</h2>
+        <input type="number" id="piAmount" placeholder="Enter Pi amount" value="1">
+        <select id="piCurrency">
+            <option value="usd">USD</option>
+            <option value="myr">MYR</option>
+            <option value="eur">EUR</option>
+        </select>
+        <button onclick="convertPiToFiat()">Convert</button>
+        <p class="result" id="piResult">Result: -</p>
+    </div>
 
-<div class="donation">
-    <h2>Support Development</h2>
-    <p>Donate using TON</p>
-    <p>Wallet Address: TON_WALLET_ADDRESS</p>
-    <img src="ton_wallet_qr.png" alt="TON Wallet QR" width="150">
-</div>
+    <div class="container">
+        <h2>Fiat to Pi</h2>
+        <input type="number" id="fiatAmount" placeholder="Enter Fiat amount">
+        <select id="fiatCurrency">
+            <option value="usd">USD</option>
+            <option value="myr">MYR</option>
+            <option value="eur">EUR</option>
+        </select>
+        <button onclick="convertFiatToPi()">Convert</button>
+        <p class="result" id="fiatResult">Result: -</p>
+    </div>
 
-<script>
-    function convertPiToFiat() {
-        let piAmount = document.getElementById("piAmount").value;
-        let currency = document.getElementById("fiatCurrency").value;
-        let piPrice = 3.14; // Placeholder for Pi price, replace with API call later
-        let result = (piAmount * piPrice).toFixed(2);
-        document.getElementById("piToFiatResult").innerText = result + " " + currency;
-    }
-    
-    function convertFiatToPi() {
-        let fiatAmount = document.getElementById("fiatAmount").value;
-        let currency = document.getElementById("fiatToPiCurrency").value;
-        let piPrice = 3.14; // Placeholder for Pi price, replace with API call later
-        let result = (fiatAmount / piPrice).toFixed(5);
-        document.getElementById("fiatToPiResult").innerText = result + " Pi";
-    }
-</script>
-<script>
-  async function fetchPiPrice() {
-    try {
-      const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=pi-network-defi&vs_currencies=usdt");
-      const data = await response.json();
-      const piPrice = data["pi-network-defi"].usdt;
+    <div class="container">
+        <h2>Support Development</h2>
+        <p>Donate using TON</p>
+        <p>Wallet Address: TON_WALLET_ADDRESS</p>
+        <img src="ton_wallet_qr.png" alt="TON Wallet QR" width="200">
+    </div>
 
-      // Update the price display
-      document.getElementById("pi-price").textContent = `${piPrice} USDT`;
+    <script>
+        let piPriceUSD = 0;
 
-      return piPrice; 
-    } catch (error) {
-      console.error("Error fetching Pi price:", error);
-      document.getElementById("pi-price").textContent = "Error fetching price";
-    }
-  }
-
-  // Call the function when the page loads
-  window.onload = fetchPiPrice;
-</script>
-
-<script>
-    async function fetchPiPrice() {
-        try {
-            const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=pi-network&vs_currencies=usdt");
-            const data = await response.json();
-            if (data["pi-network"]) {
-                document.getElementById("pi-price").textContent = data["pi-network"].usdt + " USDT";
-            } else {
-                document.getElementById("pi-price").textContent = "Unavailable";
+        async function fetchPiPrice() {
+            try {
+                const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=pi-network&vs_currencies=usd,myr,eur");
+                const data = await response.json();
+                if (data["pi-network"]) {
+                    piPriceUSD = data["pi-network"].usd;
+                    document.getElementById("pi-price").textContent = piPriceUSD.toFixed(4);
+                } else {
+                    document.getElementById("pi-price").textContent = "Unavailable";
+                }
+            } catch (error) {
+                console.error("Error fetching Pi price:", error);
+                document.getElementById("pi-price").textContent = "Error";
             }
-        } catch (error) {
-            console.error("Error fetching Pi price:", error);
-            document.getElementById("pi-price").textContent = "Error";
         }
-    }
 
-    fetchPiPrice(); // Call the function when the page loads
-    setInterval(fetchPiPrice, 60000); // Update price every 60 seconds
-</script>
+        function convertPiToFiat() {
+            const amount = parseFloat(document.getElementById("piAmount").value);
+            const currency = document.getElementById("piCurrency").value;
+            
+            if (isNaN(amount) || amount <= 0) {
+                document.getElementById("piResult").textContent = "Invalid amount!";
+                return;
+            }
+
+            let conversionRate = 0;
+            if (currency === "usd") conversionRate = piPriceUSD;
+            else if (currency === "myr") conversionRate = piPriceUSD * 4.5; // Example rate
+            else if (currency === "eur") conversionRate = piPriceUSD * 0.85; // Example rate
+
+            const result = amount * conversionRate;
+            document.getElementById("piResult").textContent = `Result: ${result.toFixed(2)} ${currency.toUpperCase()}`;
+        }
+
+        function convertFiatToPi() {
+            const amount = parseFloat(document.getElementById("fiatAmount").value);
+            const currency = document.getElementById("fiatCurrency").value;
+
+            if (isNaN(amount) || amount <= 0) {
+                document.getElementById("fiatResult").textContent = "Invalid amount!";
+                return;
+            }
+
+            let conversionRate = 0;
+            if (currency === "usd") conversionRate = piPriceUSD;
+            else if (currency === "myr") conversionRate = piPriceUSD * 4.5;
+            else if (currency === "eur") conversionRate = piPriceUSD * 0.85;
+
+            if (conversionRate === 0) {
+                document.getElementById("fiatResult").textContent = "Invalid conversion!";
+                return;
+            }
+
+            const result = amount / conversionRate;
+            document.getElementById("fiatResult").textContent = `Result: ${result.toFixed(4)} PI`;
+        }
+
+        fetchPiPrice();
+        setInterval(fetchPiPrice, 60000); // Update price every 60 seconds
+    </script>
 
 </body>
 </html>
