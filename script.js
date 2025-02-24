@@ -1,41 +1,56 @@
-document.addEventListener("DOMContentLoaded", function () { const piToFiatRate = { USD: 100, EUR: 90, MYR: 450 }; // Example rates const fiatToPiRate = { USD: 1 / 100, EUR: 1 / 90, MYR: 1 / 450 };
+document.addEventListener("DOMContentLoaded", async function () { const piPriceElement = document.getElementById("piPrice"); const fromCurrency = document.getElementById("fromCurrency"); const toCurrency = document.getElementById("toCurrency"); const amountInput = document.getElementById("amount"); const resultElement = document.getElementById("result"); const donateButton = document.getElementById("donate");
 
-const currencySelect = document.getElementById("currency");
-const piInput = document.getElementById("pi-amount");
-const fiatInput = document.getElementById("fiat-amount");
-const convertToFiatBtn = document.getElementById("convert-to-fiat");
-const convertToPiBtn = document.getElementById("convert-to-pi");
-const themeToggle = document.getElementById("theme-toggle");
-const themeLabel = document.getElementById("theme-label");
-
-function convertPiToFiat() {
-    const currency = currencySelect.value;
-    const piAmount = parseFloat(piInput.value);
-    if (!isNaN(piAmount)) {
-        fiatInput.value = (piAmount * piToFiatRate[currency]).toFixed(2);
+async function fetchPiPrice() {
+    try {
+        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=pi-network&vs_currencies=usd,myr,idr,eur,gbp,sgd");
+        const data = await response.json();
+        return data["pi-network"];
+    } catch (error) {
+        console.error("Error fetching Pi price:", error);
+        return null;
     }
 }
 
-function convertFiatToPi() {
-    const currency = currencySelect.value;
-    const fiatAmount = parseFloat(fiatInput.value);
-    if (!isNaN(fiatAmount)) {
-        piInput.value = (fiatAmount * fiatToPiRate[currency]).toFixed(6);
+async function updatePiPrice() {
+    const prices = await fetchPiPrice();
+    if (prices) {
+        piPriceElement.textContent = `1 Pi = ${prices.usd} USD | ${prices.myr} MYR | ${prices.idr} IDR | ${prices.eur} EUR | ${prices.gbp} GBP | ${prices.sgd} SGD`;
     }
 }
 
-function toggleTheme() {
-    document.body.classList.toggle("dark-mode");
-    if (document.body.classList.contains("dark-mode")) {
-        themeLabel.textContent = "🌙 Dark Mode";
+async function convertCurrency() {
+    const prices = await fetchPiPrice();
+    if (!prices) return;
+
+    const amount = parseFloat(amountInput.value);
+    if (isNaN(amount)) {
+        resultElement.textContent = "Please enter a valid amount.";
+        return;
+    }
+
+    const from = fromCurrency.value;
+    const to = toCurrency.value;
+
+    let piToFiatRate = prices[to.toLowerCase()];
+    let fiatToPiRate = 1 / prices[from.toLowerCase()];
+
+    if (from === "PI") {
+        resultElement.textContent = `${amount} Pi = ${(amount * piToFiatRate).toFixed(2)} ${to}`;
+    } else if (to === "PI") {
+        resultElement.textContent = `${amount} ${from} = ${(amount * fiatToPiRate).toFixed(4)} Pi`;
     } else {
-        themeLabel.textContent = "☀️ Light Mode";
+        resultElement.textContent = "Invalid conversion. Please check your selection.";
     }
 }
 
-convertToFiatBtn.addEventListener("click", convertPiToFiat);
-convertToPiBtn.addEventListener("click", convertFiatToPi);
-themeToggle.addEventListener("click", toggleTheme);
+donateButton.addEventListener("click", function () {
+    window.open("https://ton.org/donate", "_blank");
+});
+
+document.getElementById("convert").addEventListener("click", convertCurrency);
+
+updatePiPrice();
+setInterval(updatePiPrice, 60000);
 
 });
 
