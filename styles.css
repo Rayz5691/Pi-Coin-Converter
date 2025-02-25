@@ -7,31 +7,39 @@ body {
     padding: 20px;
 }
 
-/* Container to Center Align Elements */
+/* Container */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Ensure All Inputs & Buttons Have Same Size */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 320px; /* Ensures consistent width */
+}
+
 /* Input Fields & Select Box */
 input, select {
-    width: 100%; /* Full width */
-    max-width: 300px; /* Consistent width */
-    padding: 10px;
+    width: 100%;
+    padding: 12px;
     font-size: 16px;
-    border: 2px solid #f7a600; /* Pi Network theme color */
+    border: 2px solid #f7a600; /* Pi Network theme */
     border-radius: 5px;
     background-color: #2e2e2e;
     color: white;
     text-align: center;
     margin: 5px 0;
+    box-sizing: border-box; /* Prevents overflow */
 }
 
 /* Convert Button */
 button {
     width: 100%;
-    max-width: 300px; /* Ensuring same width as input */
     padding: 12px;
     font-size: 16px;
     font-weight: bold;
