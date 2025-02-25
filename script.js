@@ -1,56 +1,45 @@
-document.addEventListener("DOMContentLoaded", async function () { const piPriceElement = document.getElementById("piPrice"); const fromCurrency = document.getElementById("fromCurrency"); const toCurrency = document.getElementById("toCurrency"); const amountInput = document.getElementById("amount"); const resultElement = document.getElementById("result"); const donateButton = document.getElementById("donate");
+document.getElementById("convertToFiat").addEventListener("click", function() {
+    let piAmount = parseFloat(document.getElementById("piAmount").value);
+    let currency = document.getElementById("currency").value;
 
-async function fetchPiPrice() {
-    try {
-        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=pi-network&vs_currencies=usd,myr,idr,eur,gbp,sgd");
-        const data = await response.json();
-        return data["pi-network"];
-    } catch (error) {
-        console.error("Error fetching Pi price:", error);
-        return null;
-    }
-}
-
-async function updatePiPrice() {
-    const prices = await fetchPiPrice();
-    if (prices) {
-        piPriceElement.textContent = `1 Pi = ${prices.usd} USD | ${prices.myr} MYR | ${prices.idr} IDR | ${prices.eur} EUR | ${prices.gbp} GBP | ${prices.sgd} SGD`;
-    }
-}
-
-async function convertCurrency() {
-    const prices = await fetchPiPrice();
-    if (!prices) return;
-
-    const amount = parseFloat(amountInput.value);
-    if (isNaN(amount)) {
-        resultElement.textContent = "Please enter a valid amount.";
+    if (isNaN(piAmount) || piAmount <= 0) {
+        alert("Please enter a valid Pi amount.");
         return;
     }
 
-    const from = fromCurrency.value;
-    const to = toCurrency.value;
+    getExchangeRate(currency, function(rate) {
+        let fiatValue = piAmount * rate;
+        document.getElementById("result").innerHTML = `💰 ${piAmount} Pi = ${fiatValue.toFixed(2)} ${currency}`;
+    });
+});
 
-    let piToFiatRate = prices[to.toLowerCase()];
-    let fiatToPiRate = 1 / prices[from.toLowerCase()];
+document.getElementById("convertToPi").addEventListener("click", function() {
+    let fiatAmount = parseFloat(document.getElementById("fiatAmount").value);
+    let currency = document.getElementById("currency").value;
 
-    if (from === "PI") {
-        resultElement.textContent = `${amount} Pi = ${(amount * piToFiatRate).toFixed(2)} ${to}`;
-    } else if (to === "PI") {
-        resultElement.textContent = `${amount} ${from} = ${(amount * fiatToPiRate).toFixed(4)} Pi`;
-    } else {
-        resultElement.textContent = "Invalid conversion. Please check your selection.";
+    if (isNaN(fiatAmount) || fiatAmount <= 0) {
+        alert("Please enter a valid Fiat amount.");
+        return;
     }
+
+    getExchangeRate(currency, function(rate) {
+        let piValue = fiatAmount / rate;
+        document.getElementById("result").innerHTML = `🔄 ${fiatAmount} ${currency} = ${piValue.toFixed(6)} Pi`;
+    });
+});
+
+// Function to fetch real-time exchange rates
+function getExchangeRate(currency, callback) {
+    let apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=pi-network&vs_currencies=${currency.toLowerCase()}`;
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            let rate = data["pi-network"][currency.toLowerCase()];
+            callback(rate);
+        })
+        .catch(error => {
+            console.error("Error fetching exchange rate:", error);
+            alert("Failed to fetch exchange rate. Please try again later.");
+        });
 }
-
-donateButton.addEventListener("click", function () {
-    window.open("https://ton.org/donate", "_blank");
-});
-
-document.getElementById("convert").addEventListener("click", convertCurrency);
-
-updatePiPrice();
-setInterval(updatePiPrice, 60000);
-
-});
-
