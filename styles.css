@@ -1,107 +1,80 @@
-/* Pi Coin Converter Styling */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #290c3c; /* Dark purple - Pi theme */
-    color: white;
+    background-color: #2c003e; /* Pi Network Theme */
+    color: #ffffff;
     text-align: center;
+    margin: 0;
     padding: 20px;
 }
 
-/* Main Container */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Input, Select, and Button Group */
-.input-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 320px; /* Set same width */
-}
-
-/* Input Fields & Select Dropdown */
-input, select {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 2px solid #f7a600; /* Pi Gold */
+/* Dropdown & Input Fields */
+select, input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ffb400; /* Pi Gold */
     border-radius: 5px;
-    background-color: #3d1a56; /* Darker purple */
+    background-color: #3e005c;
     color: white;
+    font-size: 18px;
     text-align: center;
-    margin: 5px 0;
-    box-sizing: border-box;
 }
 
-/* Convert Button */
+/* Buttons */
 button {
-    width: 100%;
+    width: 80%;
     padding: 12px;
-    font-size: 16px;
+    margin: 10px 0 15px;
+    background-color: #ffb400; /* Pi Gold */
+    color: #2c003e;
+    font-size: 18px;
     font-weight: bold;
     border: none;
-    background-color: #f7a600; /* Pi Gold */
-    color: black;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 5px; /* Reduce gap */
 }
 
-/* Button Hover Effect */
 button:hover {
-    background-color: #d48c00;
+    background-color: #ff9900; /* Darker Pi Gold */
 }
 
-/* Fix Input, Button, and Select Width */
-.input-group input,
-.input-group select,
-.input-group button {
-    max-width: 320px; /* Same width */
+/* Spacing Fix Between Buttons and Inputs */
+input, button {
+    display: block;
+    margin: 10px auto;
 }
 
-/* Reduce QR Code Size */
+/* Fix "Enter Fiat Amount" Field Alignment */
+#fiatAmount {
+    display: block;
+    margin-top: 20px; /* Increased gap */
+}
+
+/* Fix Button & Field Widths */
+input, select, button {
+    max-width: 300px;
+}
+
+/* Ensure Convert Buttons Are Equal */
+button {
+    width: 300px; /* Same width as input fields */
+}
+
+/* QR Code Size Fix */
 .qr-container img {
-    width: 130px; /* Final size */
-    height: auto;
-    margin-top: 10px;
+    width: 150px;  /* Smaller QR */
+    height: 150px;
+    display: block;
+    margin: 10px auto;
 }
 
-/* Donation Section */
-.donation-box {
-    background-color: #3d1a56;
-    padding: 15px;
-    border-radius: 5px;
-    max-width: 350px;
+/* Wallet Address Wrapping */
+.wallet-address {
+    word-wrap: break-word;
+    white-space: normal;
     text-align: center;
-    margin-top: 15px;
-    border: 2px solid #f7a600; /* Highlight Pi Gold */
+    max-width: 90%;
+    margin: 10px auto;
+    font-size: 14px;
 }
-
-/* Fixing spacing */
-.input-group input,
-.input-group select,
-.input-group button {
-    max-width: 320px;
-    margin: 5px auto; /* Center and keep spacing uniform */
-}
-/* Fix spacing issues */
-.input-group button {
-    margin-bottom: 15px; /* Increase spacing between button and next input field */
-}
-
-/* Increase gap below "Convert to Pi" */
-#conversion-result {
-    margin-top: 15px; /* Adds space above the result */
-}
-
-/* Optional: Increase overall padding */
-.container {
-    padding: 10px 20px;
-}
-<p class="wallet-address">
-    MDFNWH6ZFJVHJDLBMNOUT35X4EEKQVJAO3ZDL4NL7VQJLC4PJOQFWAAAAAA2FGKBRET5W
-</p>
