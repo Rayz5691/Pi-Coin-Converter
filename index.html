@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,29 +9,37 @@
 <body>
     <div class="container">
         <h1>Pi Coin Converter</h1>
-        <button id="theme-toggle">🌞 Light Mode</button><label for="currency">Choose Fiat Currency:</label>
-    <select id="currency">
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="MYR">MYR</option>
-    </select>
-    
-    <label for="piAmount">Enter Pi Amount:</label>
-    <input type="number" id="piAmount" placeholder="Enter Pi">
-    <button id="convertToFiat">Convert to Fiat</button>
-    
-    <label for="fiatAmount">Enter Fiat Amount:</label>
-    <input type="number" id="fiatAmount" placeholder="Enter Fiat">
-    <button id="convertToPi">Convert to Pi</button>
-    
-    <div class="donation-section">
-        <h2>Support Us</h2>
-        <p>If you like this tool, consider donating Pi:</p>
-        <button id="donate">Donate Pi</button>
+
+        <label for="currency">Choose Fiat Currency:</label>
+        <select id="currency">
+            <option value="USD">USD - US Dollar</option>
+            <option value="MYR">MYR - Malaysian Ringgit</option>
+            <option value="IDR">IDR - Indonesian Rupiah</option>
+            <option value="EUR">EUR - Euro</option>
+            <option value="GBP">GBP - British Pound</option>
+            <option value="SGD">SGD - Singapore Dollar</option>
+        </select>
+
+        <label for="piAmount">Enter Pi Amount:</label>
+        <input type="number" id="piAmount" placeholder="Enter Pi amount">
+
+        <button id="convertToFiat">Convert to Fiat</button>
+
+        <label for="fiatAmount">Enter Fiat Amount:</label>
+        <input type="number" id="fiatAmount" placeholder="Enter Fiat amount">
+
+        <button id="convertToPi">Convert to Pi</button>
+
+        <div id="result"></div>
+
+        <div class="donation-box">
+            <h2>Support the Developer</h2>
+            <p>Donate Pi to the following address:</p>
+            <p class="wallet-address">MDFNWH6ZFJVHJDLBMNOUT35X4EEKQVJAO3ZDL4NL7VQJLC4PJOQFWAAAAAA2FGKBRET5W</p>
+            <img src="qr-code.png" alt="Pi Donation QR Code" class="qr-code">
+        </div>
     </div>
-</div>
 
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
