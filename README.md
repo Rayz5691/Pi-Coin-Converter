@@ -4,8 +4,11 @@ A simple telegram mini app that allows users to convert Pi network coins to any 
 Features
 
 ✅ Real-time Pi to USD conversion using CoinGecko API
+
 ✅ Supports all world currencies via ExchangeRate-API
+
 ✅ Simple and lightweight Telegram Web App
+
 ✅ Mobile-friendly UI
 
 How to Use
