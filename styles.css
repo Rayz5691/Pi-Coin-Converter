@@ -1,40 +1,40 @@
-/* General Styling */
+/* Pi Coin Converter Styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #1e1e1e;
+    background-color: #290c3c; /* Dark purple - Pi theme */
     color: white;
     text-align: center;
     padding: 20px;
 }
 
-/* Container */
+/* Main Container */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Ensure All Inputs & Buttons Have Same Size */
+/* Input, Select, and Button Group */
 .input-group {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 320px; /* Ensures consistent width */
+    max-width: 320px; /* Set same width */
 }
 
-/* Input Fields & Select Box */
+/* Input Fields & Select Dropdown */
 input, select {
     width: 100%;
     padding: 12px;
     font-size: 16px;
-    border: 2px solid #f7a600; /* Pi Network theme */
+    border: 2px solid #f7a600; /* Pi gold */
     border-radius: 5px;
-    background-color: #2e2e2e;
+    background-color: #3d1a56; /* Darker purple */
     color: white;
     text-align: center;
     margin: 5px 0;
-    box-sizing: border-box; /* Prevents overflow */
+    box-sizing: border-box;
 }
 
 /* Convert Button */
@@ -44,14 +44,38 @@ button {
     font-size: 16px;
     font-weight: bold;
     border: none;
-    background-color: #f7a600; /* Pi Theme Gold */
+    background-color: #f7a600; /* Pi Gold */
     color: black;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 5px; /* Reduce gap */
 }
 
 /* Button Hover Effect */
 button:hover {
     background-color: #d48c00;
+}
+
+/* Fix Input, Button, and Select Width */
+.input-group input,
+.input-group select,
+.input-group button {
+    max-width: 320px; /* Same width */
+}
+
+/* Reduce QR Code Size */
+.qr-container img {
+    width: 150px; /* Resize QR */
+    height: auto;
+    margin-top: 10px;
+}
+
+/* Donation Section */
+.donation-box {
+    background-color: #3d1a56;
+    padding: 15px;
+    border-radius: 5px;
+    max-width: 350px;
+    text-align: center;
+    margin-top: 15px;
 }
