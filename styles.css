@@ -88,3 +88,20 @@ button:hover {
     max-width: 320px;
     margin: 5px auto; /* Center and keep spacing uniform */
 }
+/* Fix spacing issues */
+.input-group button {
+    margin-bottom: 15px; /* Increase spacing between button and next input field */
+}
+
+/* Increase gap below "Convert to Pi" */
+#conversion-result {
+    margin-top: 15px; /* Adds space above the result */
+}
+
+/* Optional: Increase overall padding */
+.container {
+    padding: 10px 20px;
+}
+<p class="wallet-address">
+    MDFNWH6ZFJVHJDLBMNOUT35X4EEKQVJAO3ZDL4NL7VQJLC4PJOQFWAAAAAA2FGKBRET5W
+</p>
