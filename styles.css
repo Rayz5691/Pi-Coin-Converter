@@ -28,7 +28,7 @@ input, select {
     width: 100%;
     padding: 12px;
     font-size: 16px;
-    border: 2px solid #f7a600; /* Pi gold */
+    border: 2px solid #f7a600; /* Pi Gold */
     border-radius: 5px;
     background-color: #3d1a56; /* Darker purple */
     color: white;
@@ -65,7 +65,7 @@ button:hover {
 
 /* Reduce QR Code Size */
 .qr-container img {
-    width: 150px; /* Resize QR */
+    width: 130px; /* Final size */
     height: auto;
     margin-top: 10px;
 }
@@ -78,4 +78,13 @@ button:hover {
     max-width: 350px;
     text-align: center;
     margin-top: 15px;
+    border: 2px solid #f7a600; /* Highlight Pi Gold */
+}
+
+/* Fixing spacing */
+.input-group input,
+.input-group select,
+.input-group button {
+    max-width: 320px;
+    margin: 5px auto; /* Center and keep spacing uniform */
 }
