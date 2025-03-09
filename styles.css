@@ -1,80 +1,87 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #2c003e; /* Pi Network Theme */
-    color: #ffffff;
+    background-color: #2e0145; /* Pi Network Theme Color */
+    color: white;
     text-align: center;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
-/* Dropdown & Input Fields */
-select, input {
-    width: 80%;
+/* Main Container */
+.container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #3d0156; /* Darker shade for contrast */
+    border-radius: 10px;
+}
+
+/* Headings */
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Dropdown */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 2px solid #f7a600;
+    border-radius: 5px;
+    background-color: #3d0156;
+    color: white;
+    font-size: 16px;
+}
+
+/* Input Fields */
+input {
+    width: calc(100% - 20px);
     padding: 10px;
     margin: 10px 0;
-    border: 2px solid #ffb400; /* Pi Gold */
+    border: 2px solid #f7a600;
     border-radius: 5px;
-    background-color: #3e005c;
+    background-color: #3d0156;
     color: white;
-    font-size: 18px;
-    text-align: center;
+    font-size: 16px;
 }
 
 /* Buttons */
 button {
-    width: 80%;
+    width: 100%;
     padding: 12px;
-    margin: 10px 0 15px;
-    background-color: #ffb400; /* Pi Gold */
-    color: #2c003e;
-    font-size: 18px;
-    font-weight: bold;
+    margin: 10px 0;
     border: none;
     border-radius: 5px;
+    background-color: #f7a600;
+    color: #3d0156;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #ff9900; /* Darker Pi Gold */
+    background-color: #ffbf47;
 }
 
-/* Spacing Fix Between Buttons and Inputs */
-input, button {
+/* QR Code */
+.qr-code img {
+    width: 150px;  /* Adjust this size if needed */
+    height: auto;
     display: block;
-    margin: 10px auto;
+    margin: 20px auto; /* Centering */
 }
 
-/* Fix "Enter Fiat Amount" Field Alignment */
-#fiatAmount {
-    display: block;
-    margin-top: 20px; /* Increased gap */
+/* Donation Section */
+.donation-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: #3d0156;
+    border-radius: 10px;
 }
 
-/* Fix Button & Field Widths */
-input, select, button {
-    max-width: 300px;
-}
-
-/* Ensure Convert Buttons Are Equal */
-button {
-    width: 300px; /* Same width as input fields */
-}
-
-/* QR Code Size Fix */
-.qr-container img {
-    width: 150px;  /* Smaller QR */
-    height: 150px;
-    display: block;
-    margin: 10px auto;
-}
-
-/* Wallet Address Wrapping */
-.wallet-address {
-    word-wrap: break-word;
-    white-space: normal;
-    text-align: center;
-    max-width: 90%;
-    margin: 10px auto;
+.donation-section p {
     font-size: 14px;
+    word-wrap: break-word; /* Ensures text wraps properly */
 }
