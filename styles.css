@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #3d0156; /* Pi Coin Purple */
+    background-color: #3D0156; /* Pi Coin Purple */
     color: #fff;
     text-align: center;
     padding: 20px;
@@ -9,7 +9,7 @@ body {
 
 /* Main Container */
 .converter-container {
-    background: #4b0172; /* Slightly darker Pi Theme */
+    background: #4B0172; /* Darker Pi Theme */
     padding: 20px;
     border-radius: 10px;
     max-width: 400px;
@@ -19,7 +19,7 @@ body {
 
 /* Input & Button Styling */
 input, select, button {
-    width: 100%; /* Make everything same width */
+    width: 100%; /* Everything same width */
     padding: 12px;
     margin-top: 10px;
     border-radius: 5px;
@@ -29,28 +29,28 @@ input, select, button {
     box-sizing: border-box; /* Fix width calculation */
 }
 
-/* Input Box Fix */
-input {
-    height: 45px; /* Same height as button */
+/* Input & Button Height Fix */
+input, button {
+    height: 50px; /* Ensure all same height */
 }
 
 /* Select Dropdown */
 select {
-    background-color: #5a018a;
+    background-color: #5A018A;
     color: white;
+    height: 50px;
 }
 
 /* Buttons */
 button {
-    background-color: #ffcc00; /* Pi Coin Gold */
-    color: #3d0156;
+    background-color: #FFCC00; /* Pi Coin Gold */
+    color: #3D0156;
     font-weight: bold;
     cursor: pointer;
-    height: 45px; /* Same as input */
 }
 
 button:hover {
-    background-color: #ffdb4d;
+    background-color: #FFDB4D;
 }
 
 /* Result Box */
@@ -59,27 +59,32 @@ button:hover {
     font-weight: bold;
     margin-top: 15px;
     padding: 10px;
-    background: #5a018a;
+    background: #5A018A;
     border-radius: 5px;
 }
 
-/* Fixing Spacing Between Elements */
+/* Fixing Spacing */
 .input-group {
     margin-bottom: 15px;
+}
+
+/* Fix the Gap Issue */
+.input-group:last-child {
+    margin-bottom: 30px;
 }
 
 /* Donation Section */
 .donation-section {
     margin-top: 20px;
     padding: 15px;
-    background: #3d0156;
+    background: #3D0156;
     border-radius: 10px;
     text-align: center;
 }
 
-/* QR Code */
+/* QR Code Fix */
 .qr-code img {
-    width: 80px;  /* Fix QR Size */
+    width: 120px;  /* Adjusted QR Size */
     height: auto;
     display: block;
     margin: 10px auto; /* Centered */
@@ -93,11 +98,9 @@ button:hover {
     text-align: center;
     max-width: 350px;
     margin: auto;
-}
-
-/* Fix Spacing Issues */
-.converter-container .input-group {
-    margin-bottom: 20px;
+    background: #5A018A;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 /* Footer */
