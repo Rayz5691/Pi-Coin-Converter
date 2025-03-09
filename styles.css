@@ -1,76 +1,70 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #2e0145; /* Pi Network Theme Color */
-    color: white;
+    background-color: #3d0156; /* Pi Coin Purple Theme */
+    color: #fff;
     text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-/* Main Container */
-.container {
-    max-width: 400px;
-    margin: 20px auto;
     padding: 20px;
-    background: #3d0156; /* Darker shade for contrast */
+}
+
+/* Container */
+.converter-container {
+    background: #4b0172; /* Darker Pi Theme */
+    padding: 20px;
     border-radius: 10px;
-}
-
-/* Headings */
-h1 {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-/* Dropdown */
-select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 2px solid #f7a600;
-    border-radius: 5px;
-    background-color: #3d0156;
-    color: white;
-    font-size: 16px;
+    max-width: 400px;
+    margin: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Input Fields */
-input {
-    width: calc(100% - 20px);
+input, select, button {
+    width: 100%;
     padding: 10px;
-    margin: 10px 0;
-    border: 2px solid #f7a600;
+    margin-top: 10px;
     border-radius: 5px;
-    background-color: #3d0156;
-    color: white;
+    border: none;
     font-size: 16px;
+}
+
+/* Input Box Size Fix */
+input {
+    height: 45px; /* Same as button */
+    text-align: center;
+}
+
+/* Select Dropdown */
+select {
+    background-color: #5a018a;
+    color: white;
 }
 
 /* Buttons */
 button {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-    background-color: #f7a600;
+    background-color: #ffcc00; /* Pi Coin Gold */
     color: #3d0156;
-    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+    height: 45px; /* Same as input */
 }
 
 button:hover {
-    background-color: #ffbf47;
+    background-color: #ffdb4d;
 }
 
-/* QR Code */
-.qr-code img {
-    width: 150px;  /* Adjust this size if needed */
-    height: auto;
-    display: block;
-    margin: 20px auto; /* Centering */
+/* Spacing Fix for Inputs & Buttons */
+.input-group {
+    margin-bottom: 15px;
+}
+
+/* Result Box */
+#result {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 10px;
+    background: #5a018a;
+    border-radius: 5px;
 }
 
 /* Donation Section */
@@ -79,9 +73,28 @@ button:hover {
     padding: 15px;
     background: #3d0156;
     border-radius: 10px;
+    text-align: center;
 }
 
+/* QR Code */
+.qr-code img {
+    width: 120px;  /* Smaller size */
+    height: auto;
+    display: block;
+    margin: 15px auto; /* Centered */
+}
+
+/* Wallet Address Formatting */
 .donation-section p {
     font-size: 14px;
-    word-wrap: break-word; /* Ensures text wraps properly */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    font-size: 12px;
+    opacity: 0.8;
 }
