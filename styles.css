@@ -1,111 +1,82 @@
-/* General Styles */
+/* Pi Coin Converter - Updated Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #3D0156; /* Pi Coin Purple */
-    color: #fff;
+    font-family: 'Arial', sans-serif;
+    background-color: #2c0051; /* Dark purple Pi Network theme */
+    color: #f5c211; /* Pi gold color */
     text-align: center;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
 }
 
-/* Main Container */
-.converter-container {
-    background: #4B0172; /* Darker Pi Theme */
-    padding: 20px;
-    border-radius: 10px;
+.container {
+    width: 90%;
     max-width: 400px;
-    margin: auto;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    background: #3a0c6f;
+    padding: 20px;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
 }
 
-/* Input & Button Styling */
+h2 {
+    margin-bottom: 20px;
+}
+
 input, select, button {
-    width: 100%; /* Everything same width */
+    width: 100%;
     padding: 12px;
     margin-top: 10px;
     border-radius: 5px;
     border: none;
     font-size: 16px;
-    text-align: center;
-    box-sizing: border-box; /* Fix width calculation */
 }
 
-/* Input & Button Height Fix */
-input, button {
-    height: 50px; /* Ensure all same height */
+input {
+    background: #fff;
+    color: #000;
 }
 
-/* Select Dropdown */
-select {
-    background-color: #5A018A;
-    color: white;
-    height: 50px;
-}
-
-/* Buttons */
 button {
-    background-color: #FFCC00; /* Pi Coin Gold */
-    color: #3D0156;
+    background: #f5c211;
+    color: #2c0051;
     font-weight: bold;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
-    background-color: #FFDB4D;
+    background: #d4a20d;
 }
 
-/* Result Box */
-#result {
+.result-box {
+    margin-top: 20px;
     font-size: 18px;
     font-weight: bold;
-    margin-top: 15px;
-    padding: 10px;
-    background: #5A018A;
-    border-radius: 5px;
-}
-
-/* Fixing Spacing */
-.input-group {
-    margin-bottom: 15px;
-}
-
-/* Fix the Gap Issue */
-.input-group:last-child {
-    margin-bottom: 30px;
-}
-
-/* Donation Section */
-.donation-section {
-    margin-top: 20px;
+    background: #512c84;
     padding: 15px;
-    background: #3D0156;
-    border-radius: 10px;
-    text-align: center;
-}
-
-/* QR Code Fix */
-.qr-code img {
-    width: 120px;  /* Adjusted QR Size */
-    height: auto;
-    display: block;
-    margin: 10px auto; /* Centered */
-}
-
-/* Wallet Address Formatting */
-.donation-section p {
-    font-size: 14px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    text-align: center;
-    max-width: 350px;
-    margin: auto;
-    background: #5A018A;
-    padding: 10px;
     border-radius: 5px;
 }
 
-/* Footer */
-footer {
+.qr-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.qr-container img {
+    width: 120px; /* Adjusted QR code size */
+    height: 120px;
+}
+
+.wallet-address {
+    background: #4a1671;
+    padding: 10px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    font-size: 14px;
+}
+
+.footer {
     margin-top: 20px;
     font-size: 12px;
-    opacity: 0.8;
+    color: #ccc;
 }
