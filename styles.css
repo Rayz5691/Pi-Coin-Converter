@@ -1,82 +1,61 @@
-/* Pi Coin Converter - Updated Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #2c0051; /* Dark purple Pi Network theme */
-    color: #f5c211; /* Pi gold color */
+    font-family: Arial, sans-serif;
+    background-color: #290a44;
+    color: #ffffff;
     text-align: center;
-    margin: 0;
-    padding: 0;
+    padding: 20px;
 }
 
 .container {
-    width: 90%;
     max-width: 400px;
-    background: #3a0c6f;
+    margin: auto;
+    background-color: #3d1c5c;
     padding: 20px;
-    margin: 50px auto;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+    box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.5);
 }
 
-h2 {
-    margin-bottom: 20px;
+h1 {
+    color: #ffcc00;
 }
 
 input, select, button {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     margin-top: 10px;
     border-radius: 5px;
     border: none;
     font-size: 16px;
 }
 
-input {
-    background: #fff;
-    color: #000;
-}
-
 button {
-    background: #f5c211;
-    color: #2c0051;
+    background-color: #ffcc00;
+    color: #290a44;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 button:hover {
-    background: #d4a20d;
-}
-
-.result-box {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    background: #512c84;
-    padding: 15px;
-    border-radius: 5px;
+    background-color: #d4a600;
 }
 
 .qr-container {
-    margin-top: 20px;
     text-align: center;
+    margin-top: 20px;
 }
 
 .qr-container img {
-    width: 120px; /* Adjusted QR code size */
-    height: 120px;
+    width: 80%; /* Adjusted size */
+    max-width: 150px; /* Ensuring it doesn’t get too large */
+    height: auto;
 }
 
 .wallet-address {
-    background: #4a1671;
+    background-color: #44215a;
     padding: 10px;
     border-radius: 5px;
+    margin-top: 10px;
     word-wrap: break-word;
+    white-space: pre-wrap;
     font-size: 14px;
-}
-
-.footer {
-    margin-top: 20px;
-    font-size: 12px;
-    color: #ccc;
 }
